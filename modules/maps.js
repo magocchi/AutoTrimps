@@ -1216,7 +1216,7 @@ function RautoMap() {
         var insanitystacksfarmindex = insanityfarmzone.indexOf(game.global.world);
         var insanitystackszones = insanityfarmstacks[insanitystacksfarmindex];
 
-        if (insanityfarmzone.includes(game.global.world) && insanitystackszones < insanitystacks) {
+        if (insanityfarmzone.includes(game.global.world) && insanitystackszones > insanitystacks) {
             Rshouldinsanityfarm = true;
         }
     }

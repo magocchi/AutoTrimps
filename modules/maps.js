@@ -778,6 +778,8 @@ var RAMPdone = false;
 var RAMPfragfarming = false;
 var Rshouldmayhem = 0;
 var Rmayhemextraglobal = -1;
+var Rinsanityfarm = !1;
+var Rshouldinsanityfarm = !1;
 
 function RupdateAutoMapsStatus(get) {
 
@@ -786,6 +788,7 @@ function RupdateAutoMapsStatus(get) {
     //Fail Safes
     if (getPageSetting('RAutoMaps') == 0) status = 'Off';
 
+    else if (Rshouldinsanityfarm) status = 'Insanity Farming';
     else if (Rshouldmayhem == 1) status = 'Mayhem Attack';
     else if (Rshouldmayhem == 2) status = 'Mayhem Health';
     else if (Rshoulddopraid) status = 'Praiding';
@@ -1197,6 +1200,26 @@ function RautoMap() {
             go = true;
         }
     }
+    
+    //Insanity Farm
+    var insanityfarmcell;
+    insanityfarmcell = ((getPageSetting('Rinsanityfarmcell') > 0) ? getPageSetting('Rinsanityfarmcell') : 1);
+    Rinsanityfarm = (((insanityfarmcell <= 1) || (insanityfarmcell > 1 && (game.global.lastClearedCell + 1) >= insanityfarmcell)) && game.global.world > 5 && (game.global.challengeActive == "Insanity" && getPageSetting('Rinsanityfarmzone')[0] > 0 && getPageSetting('Rinsanityfarminsanitystacks')[0] > 0));
+    if (Rinsanityfarm) {
+        var insanityfarmzone;
+        var insanityfarmstacks;
+        var insanitystacks = game.challenges.Insanity.insanity;
+
+        insanityfarmzone = getPageSetting('Rinsanityfarmzone');
+        insanityfarmstacks = getPageSetting('Rinsanityfarminsanitystacks');
+
+        var insanitystacksfarmindex = insanityfarmzone.indexOf(game.global.world);
+        var insanitystackszones = insanityfarmstacks[insanitystacksfarmindex];
+
+        if (insanityfarmzone.includes(game.global.world) && insanitystackszones > insanitystacks) {
+            Rshouldinsanityfarm = true;
+        }
+    }
 
     //Map Selection
     var obj = {};
@@ -1325,9 +1348,9 @@ function RautoMap() {
     }
 
     //Everything else
-    if (!Rshoulddopraid && (RshouldDoMaps || RdoVoids || RneedPrestige || Rshouldtimefarm || Rshoulddoquest > 0 || Rshouldmayhem > 0)) {
+    if (!Rshoulddopraid && (RshouldDoMaps || RdoVoids || RneedPrestige || Rshouldtimefarm || Rshoulddoquest > 0 || Rshouldmayhem > 0 || Rshouldinsanityfarm)) {
         if (selectedMap == "world") {
-            if (!Rshouldtimefarm) {
+            if (!Rshouldtimefarm && !Rshouldinsanityfarm) {
                 if (getPageSetting('Rmayhemmap') == 2) {
                     for (var map in game.global.mapsOwnedArray) {
                         if (!game.global.mapsOwnedArray[map].noRecycle && mayhemextra >= 0 && ((game.global.world + mayhemextra) == game.global.mapsOwnedArray[map].level)) {
@@ -1342,6 +1365,45 @@ function RautoMap() {
                             selectedMap = game.global.mapsOwnedArray[map].id;
                         } else {
                             selectedMap = "create";
+                        }
+                    }
+                }
+		    } else if (Rshouldinsanityfarm && !Rshouldtimefarm) {
+                if (getPageSetting('Rinsanitymaplevel') == 0) {
+                    for (var map in game.global.mapsOwnedArray) {
+                        if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                            selectedMap = game.global.mapsOwnedArray[map].id;
+                        } else {
+                            selectedMap = "create";
+                        }
+                    }
+                } else if (getPageSetting('Rinsanitymaplevel') != 0) {
+                    var insanityfarmlevel = getPageSetting('Rinsanitymaplevel');
+                    var insanityfarmlevelindex = insanityfarmzone.indexOf(game.global.world);
+                    var insanitylevelzones = insanityfarmlevel[insanityfarmlevelindex];
+                    if (insanitylevelzones > 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world + insanitylevelzones) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (insanitylevelzones == 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && game.global.world == game.global.mapsOwnedArray[map].level) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                            } else {
+                                selectedMap = "create";
+                            }
+                        }
+                    } else if (insanitylevelzones < 0) {
+                        for (var map in game.global.mapsOwnedArray) {
+                            if (!game.global.mapsOwnedArray[map].noRecycle && ((game.global.world - 1) == game.global.mapsOwnedArray[map].level)) {
+                                selectedMap = game.global.mapsOwnedArray[map].id;
+                            } else {
+                                selectedMap = "create";
+                            }
                         }
                     }
                 }
@@ -1405,7 +1467,7 @@ function RautoMap() {
                     game.options.menu.repeatUntil.enabled = 0;
                 }
             }
-            if (!Rshoulddopraid && !RAMPfragfarming && !Rshoulddobogs && !RshouldDoMaps && !Rshouldtimefarm && Rshoulddoquest <= 0 && Rshouldmayhem <= 0 && (game.global.mapGridArray[game.global.mapGridArray.length - 1].special == targetPrestige && game.mapUnlocks[targetPrestige].last >= game.global.world)) {
+            if (!Rshoulddopraid && !RAMPfragfarming && !Rshoulddobogs && !RshouldDoMaps && !Rshouldtimefarm && Rshoulddoquest <= 0 && Rshouldmayhem <= 0 && !Rshouldinsanityfarm && (game.global.mapGridArray[game.global.mapGridArray.length - 1].special == targetPrestige && game.mapUnlocks[targetPrestige].last >= game.global.world)) {
                 repeatClicked();
             }
             if (shouldDoHealthMaps && game.global.mapBonus >= getPageSetting('RMaxMapBonushealth')) {
@@ -1699,6 +1761,25 @@ function RautoMap() {
             updateMapCost();
             if (RshouldFarm || game.global.challengeActive == 'Transmute') {
                 biomeAdvMapsSelect.value = game.global.decayDone ? "Plentiful" : "Forest";
+                updateMapCost();
+            }
+            if (Rshouldinsanityfarm && !Rshouldtimefarm && !Rshoulddoquest) {
+                if (getPageSetting('Rinsanitymaplevel') != 0) {
+
+                    var insanityfarmlevel = getPageSetting('Rinsanitymaplevel');
+
+                    var insanityfarmlevelindex = insanityfarmzone.indexOf(game.global.world);
+                    var insanitylevelzones = insanityfarmlevel[insanityfarmlevelindex];
+
+                    if (insanityfarmzone.includes(game.global.world)) {
+                        if (insanitylevelzones > 0) {
+                            $mapLevelInput.value = game.global.world;
+                            document.getElementById("advExtraLevelSelect").value = insanitylevelzones;
+                        } else if (insanitylevelzones < 0) {
+                            $mapLevelInput.value = (game.global.world - insanitylevelzones);
+                        }
+                    }
+                }
                 updateMapCost();
             }
             if (Rshouldtimefarm && !Rshoulddoquest) {

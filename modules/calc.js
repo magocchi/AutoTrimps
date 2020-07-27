@@ -700,6 +700,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.portal.Tenacity.radLevel > 0) {
 		number *= game.portal.Tenacity.getMult();
 	}
+        if (game.portal.Hunger.radLevel > 0){
+		number *= game.portal.Hunger.getMult();
+	}
 	if (game.portal.Range.radLevel > 0){
 		minFluct = fluctuation - (.02 * game.portal.Range.radLevel);
 	}

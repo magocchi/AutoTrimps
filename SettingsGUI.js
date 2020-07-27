@@ -698,7 +698,15 @@ function initializeAllSettings() {
     createSetting('Rmayhemamcut', 'M: Attack Map', 'What cut-off to use when farming maps using M: Attack and M: Smart Map. If this setting is 10, the script will do maps you can kill cells in 10 average hits. ', 'value', '-1', null, 'Challenges');
     createSetting('Rmayhemhcut', 'M: Health Cut-off', 'What cut-off to use when using M: Health. ', 'value', '-1', null, 'Challenges');
     createSetting('Rmayhemmap', ['M: Maps Off', 'M: Highest Map', 'M: Smart Map'], 'Control what maps you do to farm M: Attack and/or M: Health. M: Highest map always selects the highest map you have whether it be from Praiding, Time Farming or any you have manually created. M: Smart Map attempts to create a map best suited to the situation. Will calculate if you can survive and kill the map, and will try to buy all the necessary map attributes such as FA. ', 'multitoggle', 0, null, 'Challenges');
-    
+
+    //Insanity
+    document.getElementById('Rmayhemmap').parentNode.insertAdjacentHTML('afterend', '<br>');
+    createSetting('Rinsanityon', 'Insanity', 'Turn on Insanity settings. ', 'boolean', 'false', null, 'Challenges');
+    createSetting('Rinsanityfarmzone', 'Insanity Farming', 'Farms for specified stacks in IF: Stacks at zone according to this settings value. Can use 108,109,110. ', 'multiValue', [-1], null, 'Maps');
+    createSetting('Rinsanityfarmcell', 'IF: Cell', 'Insanity Farm at this Cell. -1 to run them at the default value, which is 1. ', 'value', '-1', null, 'Maps');
+    createSetting('Rinsanityfarmstack', 'IF: Stacks', 'How many stacks to farm at zone specified in IF. Can use 300,400,500. These values should match up to your IF zones. If using IF and IF: Stacks examples (110 and 500) it will farm at z110 for 500 stacks of insanity. ', 'multiValue', [-1], null, 'Maps');
+    createSetting('Rinsanityfarmlevel', 'IF: Map Level', 'What map level to use. Can use -1,1,2. -1 to use a level down from world (This is how to remove insanity stacks), 0 to use world, 1 etc to use +maps. Using 0 by itself will use global level for all maps. ', 'multiValue', [0], null, 'Maps');
+
     
 
     //Combat
@@ -1759,6 +1767,13 @@ function updateCustomButtons() {
     radonon && getPageSetting('Rmayhemon') == true ? turnOn("Rmayhemamcut") : turnOff("Rmayhemamcut");
     radonon && getPageSetting('Rmayhemon') == true ? turnOn("Rmayhemhcut") : turnOff("Rmayhemhcut");
     radonon && getPageSetting('Rmayhemon') == true ? turnOn("Rmayhemmap") : turnOff("Rmayhemmap");
+
+    //Insanity
+    radonon ? turnOn("Rinsanityon") : turnOff("Rinsanityon");
+    radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmzone") : turnOff("Rinsanityfarmzone");
+    radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmcell") : turnOff("Rinsanityfarmcell");
+    radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmstack") : turnOff("Rinsanityfarmstack");
+    radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmlevel") : turnOff("Rinsanityfarmlevel");
 
     
     

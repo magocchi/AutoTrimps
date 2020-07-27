@@ -1204,14 +1204,14 @@ function RautoMap() {
     //Insanity Farm
     var insanityfarmcell;
     insanityfarmcell = ((getPageSetting('Rinsanityfarmcell') > 0) ? getPageSetting('Rinsanityfarmcell') : 1);
-    Rinsanityfarm = (((insanityfarmcell <= 1) || (insanityfarmcell > 1 && (game.global.lastClearedCell + 1) >= insanityfarmcell)) && game.global.world > 5 && (game.global.challengeActive == "Insanity" && getPageSetting('Rinsanityfarmzone')[0] > 0 && getPageSetting('Rinsanityfarminsanitystacks')[0] > 0));
+    Rinsanityfarm = (((insanityfarmcell <= 1) || (insanityfarmcell > 1 && (game.global.lastClearedCell + 1) >= insanityfarmcell)) && game.global.world > 5 && (game.global.challengeActive == "Insanity" && getPageSetting('Rinsanityfarmzone')[0] > 0 && getPageSetting('Rinsanityfarmstack')[0] > 0));
     if (Rinsanityfarm) {
         var insanityfarmzone;
         var insanityfarmstacks;
         var insanitystacks = game.challenges.Insanity.insanity;
 
         insanityfarmzone = getPageSetting('Rinsanityfarmzone');
-        insanityfarmstacks = getPageSetting('Rinsanityfarminsanitystacks');
+        insanityfarmstacks = getPageSetting('Rinsanityfarmstack');
 
         var insanitystacksfarmindex = insanityfarmzone.indexOf(game.global.world);
         var insanitystackszones = insanityfarmstacks[insanitystacksfarmindex];

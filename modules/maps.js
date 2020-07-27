@@ -977,6 +977,7 @@ function RautoMap() {
     RshouldDoMaps = false;
     Rshouldtimefarm = false;
     Rshouldtimefarmbogs = false;
+    Rshouldinsanityfarm = false;
     if (ourBaseDamage > 0) {
         RshouldDoMaps = (!RenoughDamage || RshouldFarm || RscryerStuck);
     }

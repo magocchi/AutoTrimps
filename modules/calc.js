@@ -900,6 +900,9 @@ function RcalcBadGuyDmg(enemy,attack) {
 	number *= game.challenges.Mayhem.getEnemyMult();
 	number *= game.challenges.Mayhem.getBossMult();
     }
+    if (game.global.challengeActive == "Storm") {
+	number *= game.challenges.Storm.getAttackMult();
+    }
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
     }
@@ -952,6 +955,9 @@ function RcalcEnemyHealth(world) {
     if (game.global.challengeActive == "Mayhem") {
 	health *= game.challenges.Mayhem.getEnemyMult();
 	health *= game.challenges.Mayhem.getBossMult();
+    }
+    if (game.global.challengeActive == "Storm") {
+	health *= game.challenges.Storm.getHealthMult();
     }
     return health;
 }

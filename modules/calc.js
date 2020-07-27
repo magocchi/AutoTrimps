@@ -753,6 +753,11 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.global.mayhemCompletions > 0) {
 		number *= game.challenges.Mayhem.getTrimpMult();
 	}
+        if (game.global.challengeActive == "Berserk") {
+	    if (game.challenges.Berserk.frenzyStacks > 0) {
+	        number *= game.challenges.Berserk.getAttackMult();
+	    }
+        }
 	if (getHeirloomBonus("Shield", "gammaBurst") > 0 && (RcalcOurHealth() / (RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 5)) {
 	    	number *= ((getHeirloomBonus("Shield", "gammaBurst") / 100) + 1) / 5;
 	}
@@ -846,6 +851,17 @@ function RcalcOurHealth() {
     if (game.global.mayhemCompletions > 0) {
 	health *= game.challenges.Mayhem.getTrimpMult();
     }
+    if (game.global.challengeActive == "Insanity") {
+	health *= game.challenges.Insanity.getHealthMult();
+    }
+    if (game.global.challengeActive == "Berserk") {
+	if (game.challenges.Berserk.frenzyStacks > 0) {
+	    health *= 0.5;
+	}
+	if (game.challenges.Berserk.frenzyStacks <= 0) {
+	    health *= game.challenges.Berserk.getHealthMult(true);
+	}
+    }
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
     }
@@ -903,6 +919,9 @@ function RcalcBadGuyDmg(enemy,attack) {
     if (game.global.challengeActive == "Storm") {
 	number *= game.challenges.Storm.getAttackMult();
     }
+    if (game.global.challengeActive == "Berserk") {
+	number *= 1.5;
+    }
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
     }
@@ -958,6 +977,9 @@ function RcalcEnemyHealth(world) {
     }
     if (game.global.challengeActive == "Storm") {
 	health *= game.challenges.Storm.getHealthMult();
+    }
+    if (game.global.challengeActive == "Berserk") {
+	health *= 1.5;
     }
     return health;
 }

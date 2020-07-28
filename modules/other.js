@@ -3068,3 +3068,254 @@ function RAMPfrag() {
 	    else return false;
 	}
 }
+
+function insanityfragmin(number) {
+    document.getElementById("biomeAdvMapsSelect").value = "Plentiful";
+    document.getElementById("advExtraLevelSelect").value = number;
+    document.getElementById("advSpecialSelect").value = "fa";
+    document.getElementById("lootAdvMapsRange").value = 9;
+    document.getElementById("difficultyAdvMapsRange").value = 9;
+    document.getElementById("sizeAdvMapsRange").value = 9;
+    document.getElementById("advPerfectCheckbox").checked = true;
+    document.getElementById("mapLevelInput").value = game.global.world;
+    updateMapCost();
+    if (updateMapCost(true) <= game.resources.fragments.owned) {
+        return updateMapCost(true);
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("biomeAdvMapsSelect").value = "Random";
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("advPerfectCheckbox").checked = false;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 8;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 7;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 6;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 5;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 4;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 3;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 2;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 1;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 0;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("lootAdvMapsRange").value = 8;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 8;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 8;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 7;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 7;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 6;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 6;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 5;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 5;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 4;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 4;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 3;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 3;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 2;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 2;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 1;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 1;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("difficultyAdvMapsRange").value = 0;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("sizeAdvMapsRange").value = 0;
+        updateMapCost();
+        if (updateMapCost(true) <= game.resources.fragments.owned) {
+            return updateMapCost(true);
+        }
+    }
+    if (updateMapCost(true) > game.resources.fragments.owned) {
+        document.getElementById("advSpecialSelect").value = "0";
+        updateMapCost();
+    }
+    if (document.getElementById("advSpecialSelect").value == "0") {
+        return updateMapCost(true);
+    }
+}
+
+function insanityfrag() {
+	var cost = 0;
+	if (Rshouldinsanityfarm) {
+		
+	    var insanityfarmzone = getPageSetting('Rinsanityfarmzone');
+	    var insanityfarmlevel = getPageSetting('Rinsanityfarmlevel');
+
+            var insanityfarmlevelindex = insanityfarmzone.indexOf(game.global.world);
+            var insanitylevelzones = insanityfarmlevel[insanityfarmlevelindex];
+		
+	    if (getPageSetting('Rinsanityfarmfrag') == true) {
+		cost = insanityfragmin(insanitylevelzones);
+	    }
+
+	    if (game.resources.fragments.owned >= cost) return true;
+	    else return false;
+	}
+}

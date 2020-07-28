@@ -706,9 +706,10 @@ function initializeAllSettings() {
     createSetting('Rinsanityfarmcell', 'IF: Cell', 'Insanity Farm at this Cell. -1 to run them at the default value, which is 1. ', 'value', '-1', null, 'Challenges');
     createSetting('Rinsanityfarmstack', 'IF: Stacks', 'How many stacks to farm at zone specified in IF. Can use 300,400,500. These values should match up to your IF zones. If using IF and IF: Stacks examples (110 and 500) it will farm at z110 for 500 stacks of insanity. If stacks specified are above maximum Insanity Stacks, it will farm for maximum. ', 'multiValue', [-1], null, 'Challenges');
     createSetting('Rinsanityfarmlevel', 'IF: Map Level', 'What map level to use. Can use -1,1,2. -1 to use a level down from world (This is how to remove insanity stacks), 0 to use world, 1 etc to use +maps. Using 0 by itself will use global level for all maps. ', 'multiValue', [0], null, 'Challenges');
-
+    createSetting('Rinsanityfarmfrag', 'IF: Frags', 'Turn this on to farm fragments if you cannot afford the map you have selected for IF. ', 'boolean', 'false', null, 'Challenges');
     
 
+    
     //Combat
 
     //Line 1
@@ -1774,6 +1775,7 @@ function updateCustomButtons() {
     radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmcell") : turnOff("Rinsanityfarmcell");
     radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmstack") : turnOff("Rinsanityfarmstack");
     radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmlevel") : turnOff("Rinsanityfarmlevel");
+    radonon && getPageSetting('Rinsanityon') == true ? turnOn("Rinsanityfarmfrag") : turnOff("Rinsanityfarmfrag");
 
     
     
